@@ -6,4 +6,5 @@ RSpec.describe FasterJpath do
   it "initializes properly" do
     expect(JPath.say_rust_hello).to eq({"message" => "hello world"})
   end
+  
 end
