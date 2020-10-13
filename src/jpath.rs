@@ -2,7 +2,7 @@ use jmespath::{JmespathError, Variable};
 use rutie::{AnyObject};
 use snafu::{ResultExt, Snafu};
 use std::fs::File;
-use std::io::{BufReader, Read};
+use std::io::{Read};
 
 #[derive(Debug, Snafu)]
 pub enum Error {
@@ -35,7 +35,7 @@ pub fn extract_file<'a, 'b>(pat: &'a str, filename: &'b str) -> Result<AnyObject
   let mut json_file= File::open(filename).context(FileOpenError{filename: filename.to_string()})?;
   json_file.read_to_string(&mut contents).context(FileReadError{filename: filename.to_string()})?;
   let expr = jmespath::compile(pat).context(CompileError{pattern: pat.to_string()})?;
-  let json: Variable = serde_json::from_str(&contents).context(ParseError)?;
+  let json: serde_json::Value = serde_json::from_str(&contents).context(ParseError)?;
   let val = expr.search(json).context(SearchError)?;
   // TODO: remove this and replace it with rutie-serde
   let obj = crate::serde_anyobject::new_ruby_object(val).context(SerializationError)?;
