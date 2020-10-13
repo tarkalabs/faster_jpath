@@ -1,6 +1,6 @@
 # FasterJpath
 
-This is hopefully a faster implementation of jmespath ruby gem. It wraps over the Rust implementation of [JMESpath](https://github.com/jmespath/jmespath.rb/).
+This is hopefully a faster implementation of jmespath ruby gem. It wraps over the Rust implementation of [JMESpath](https://github.com/jmespath/jmespath.rs/).
 
 ## Usage
 
